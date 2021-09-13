@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+.button {
+    background-color: #eebbc3 !important;
+    color: #232946 !important;
+    font-family: monospace !important;
+    font-size: larger !important;
+    font-weight: 600 !important;
+    margin: 10px !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.add-task {
+    font-weight: 900;
+    font-size: 20px;
 }
+.main-container{
+     background-color: #b8c1ec !important;
+     padding: 20px !important;
+     width: 27% !important;
+     float: left !important;
+     margin: 20px !important 
+ }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+ .card {
+     background-color: #fffffe !important;
+     padding: 10px;
+     margin:10px;
+ }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+ .icons {
+     float: right
+ }
 
-.App-link {
-  color: #61dafb;
-}
+ .heading, .MuiTypography-h6 {
+    color: #121629 !important;
+    font-size: 32px !important;
+    font-weight: 900 !important;
+    font-family: monospace !important;
+ }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+ .title {
+    color: #121629;
+    font-size: 22px;
+    font-weight: 900;
+    font-family: monospace;
+ }
+
+ .content {
+    color: #121629;
+    font-size: 15px;
+    padding-top: 15px;
+    font-weight: 900;
+    font-family: monospace;
+ }
+
+ .MuiDialog-paper {
+     padding: 70px;
+ }
+
+ .MuiDialog-paperScrollPaper{
+    background-color: #b8c1ec;
+ }
+
+ .MuiInput-underline{
+    width: 125px;
+ }
+
+ .modal-container{
+     margin: 20px;
+ }
