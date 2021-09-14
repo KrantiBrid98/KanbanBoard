@@ -58,8 +58,9 @@ function AddModal(props) {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                     >
-                        <MenuItem value={"items"}>Items</MenuItem>
-                        <MenuItem value={"selected"}>Selected</MenuItem>
+                        <MenuItem value={"items"}>To Do</MenuItem>
+                        <MenuItem value={"selected"}>In Progress</MenuItem>
+                        <MenuItem value={"completed"}>Completed</MenuItem>
                     </Select>
                 </List>
             </div>
