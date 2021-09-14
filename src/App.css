@@ -8,13 +8,16 @@
 }
 
 .add-task {
+    background: rgb(238 255 238 / 30%) !important;
+    color: white !important;
     font-weight: 900;
     font-size: 20px;
 }
 .main-container{
-     background-color: #b8c1ec !important;
+     background-color: hsl(228deg 14% 93%) !important;
+     border-radius: 10px;
      padding: 20px !important;
-     width: 27% !important;
+     width: 25% !important;
      float: left !important;
      margin: 20px !important 
  }
@@ -22,6 +25,7 @@
  .card {
      background-color: #fffffe !important;
      padding: 10px;
+     border-radius: 5px;
      margin:10px;
  }
 
@@ -30,21 +34,21 @@
  }
 
  .heading, .MuiTypography-h6 {
-    color: #121629 !important;
-    font-size: 32px !important;
+    color: hsl(218deg 29% 31%) !important;
+    font-size: 20px !important;
     font-weight: 900 !important;
     font-family: monospace !important;
  }
 
  .title {
-    color: #121629;
-    font-size: 22px;
+    color: hsl(218deg 29% 31%);
+    font-size: 20px;
     font-weight: 900;
     font-family: monospace;
  }
 
  .content {
-    color: #121629;
+    color: hsl(218deg 29% 31%);
     font-size: 15px;
     padding-top: 15px;
     font-weight: 900;

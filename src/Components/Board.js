@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Edit } from "@material-ui/icons";
 import { Button } from '@material-ui/core';
@@ -7,49 +6,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditModal from "./EditModal";
 import AddModal from "./AddModal";
 
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-};
-
-/**
- * Moves an item from one list to another list.
- */
-const move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-    destClone.splice(droppableDestination.index, 0, removed);
-
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
-
-    return result;
-};
-
-const grid = 8;
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-    // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
-
-    // styles we need to apply on draggables
-    ...draggableStyle
-});
-
 const Board = () => {
 
     const [stateData, setStateData] = React.useState(
-
         localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) :
             {
                 items: [{
@@ -81,18 +40,23 @@ const Board = () => {
                     id: "item-6",
                     title: "title 6",
                     body: "body 6"
+                }],
+                completed: [{
+                    id: "item-90",
+                    title: "title 90",
+                    body: "body 90"
                 }]
             }
     )
 
-    console.log(JSON.parse(localStorage.getItem('tasks')), "???????????????")
     const [isEditModalOpen, setEditModalOpen] = React.useState(false);
     const [isAddModalOpen, setAddModalOpen] = React.useState(false);
     const [selectedValue, setSelectedValue] = React.useState({});
 
     const id2List = {
         droppable: 'items',
-        droppable2: 'selected'
+        droppable2: 'selected',
+        droppable3: 'completed'
     };
 
     const getList = id => id2List[id];
@@ -129,10 +93,11 @@ const Board = () => {
                 destination
             );
 
+            var resultKeys = Object.keys(result);
             setStateData({
                 ...stateData,
-                items: result.droppable,
-                selected: result.droppable2
+                [id2List[resultKeys[0]]]: result[resultKeys[0]],
+                [id2List[resultKeys[1]]]: result[resultKeys[1]]
             });
             localStorage.setItem('tasks', JSON.stringify({
                 ...stateData,
@@ -163,6 +128,31 @@ const Board = () => {
 
     }
 
+    // a little function to help us with reordering the result
+    const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list);
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+        return result;
+    };
+
+    /**
+     * Moves an item from one list to another list.
+     */
+    const move = (source, destination, droppableSource, droppableDestination) => {
+        const sourceClone = Array.from(source);
+        const destClone = Array.from(destination);
+        const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+        destClone.splice(droppableDestination.index, 0, removed);
+
+        const result = {};
+        result[droppableSource.droppableId] = sourceClone;
+        result[droppableDestination.droppableId] = destClone;
+
+        return result;
+    };
+
     const onAddClick = () => {
         setAddModalOpen(true);
     }
@@ -177,7 +167,7 @@ const Board = () => {
                             className="main-container"
                             ref={provided.innerRef}
                         >
-                            <div className="heading">ITEMS</div>
+                            <div className="heading">TO DO</div>
                             {stateData.items.map((item, index) => (
                                 <Draggable
                                     key={item.id}
@@ -220,8 +210,7 @@ const Board = () => {
                         <div
                             className="main-container"
                             ref={provided.innerRef}
-                        // style={getListStyle(snapshot.isDraggingOver)}
-                        > <div className="heading">SELECTED</div>
+                        > <div className="heading">IN PROGRESS</div>
                             {stateData.selected.map((item, index) => (
                                 <Draggable
                                     key={item.id}
@@ -259,7 +248,51 @@ const Board = () => {
                         </div>
                     )}
                 </Droppable>
+                <Droppable droppableId="droppable3">
+                    {(provided, snapshot) => (
+                        <div
+                            className="main-container"
+                            ref={provided.innerRef}
+                        > <div className="heading">COMPLETED</div>
+                            {stateData.completed.map((item, index) => (
+                                <Draggable
+                                    key={item.id}
+                                    draggableId={item.id}
+                                    index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            className="card"
+                                        >
+                                            <Edit
+                                                className="icons"
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={e => {
+                                                    onEditClick(item, index, "completed")
+                                                }}
+
+                                            />
+                                            <DeleteIcon
+                                                className="icons"
+                                                style={{ cursor: 'pointer' }}
+                                                onClick={e => {
+                                                    onDeleteClick(item, index, "completed")
+                                                }}
+                                            />
+                                            <div className="title">{item.title}</div>
+                                            <div className="content">{item.body}</div>
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
             </DragDropContext>
+
             {isEditModalOpen && <EditModal
                 open={isEditModalOpen}
                 onClose={setEditModalOpen}
@@ -267,6 +300,7 @@ const Board = () => {
                 setStateData={setStateData}
                 stateData={stateData}
             />}
+
             {isAddModalOpen && <AddModal
                 open={isAddModalOpen}
                 onClose={setAddModalOpen}

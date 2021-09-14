@@ -17,7 +17,6 @@ function AddModal(props) {
 
     const onSaveClick = () => {
         const id = `item-${stateData.items.length + stateData.selected.length + 1}`
-        const selectedCatData = stateData[category];
         const data = [
             ...stateData[category],
             {
