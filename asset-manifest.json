@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/KanbanBoard/static/css/main.ce6e4f93.chunk.css",
-    "main.js": "/KanbanBoard/static/js/main.39ac29ad.chunk.js",
-    "main.js.map": "/KanbanBoard/static/js/main.39ac29ad.chunk.js.map",
+    "main.js": "/KanbanBoard/static/js/main.dbc24c9a.chunk.js",
+    "main.js.map": "/KanbanBoard/static/js/main.dbc24c9a.chunk.js.map",
     "runtime-main.js": "/KanbanBoard/static/js/runtime-main.2f86e8be.js",
     "runtime-main.js.map": "/KanbanBoard/static/js/runtime-main.2f86e8be.js.map",
     "static/js/2.9628c132.chunk.js": "/KanbanBoard/static/js/2.9628c132.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.2f86e8be.js",
     "static/js/2.9628c132.chunk.js",
     "static/css/main.ce6e4f93.chunk.css",
-    "static/js/main.39ac29ad.chunk.js"
+    "static/js/main.dbc24c9a.chunk.js"
   ]
 }
