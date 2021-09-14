@@ -16,7 +16,7 @@ function AddModal(props) {
     const [category, setCategory] = React.useState("");
 
     const onSaveClick = () => {
-        const id = `item-${stateData.items.length + stateData.selected.length + 1}`
+        const id = `item-${stateData.items.length + stateData.selected.length + stateData.completed.length + 1}`
         const data = [
             ...stateData[category],
             {
